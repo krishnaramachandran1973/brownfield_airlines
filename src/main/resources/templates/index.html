@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/flights}">Flights</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/flights/new}">New Flight</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="content" class="container">
+        <h1 th:text="#{app.title}"></h1>
+        <!-- Body content goes here -->
+        <p>This is the body content of the index page.</p>
+    </div>
+    
+    <!-- Add your JavaScript scripts here -->
+</body>
+</html>

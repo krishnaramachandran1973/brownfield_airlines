@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Flight List</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<!-- Link to Bootstrap CSS -->
+<style>
+/* Custom styles can be added here */
+</style>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/flights}">Flights</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/flights/new}">New Flight</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<!-- Display success message if it exists -->
+		<div th:if="${successMessage}">
+			<p th:text="${successMessage}" style="color: green;"></p>
+		</div>
+		<h1>Flight List</h1>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th>Flight Number</th>
+					<th>Departure Airport</th>
+					<th>Destination Airport</th>
+					<th>Departure Time</th>
+					<th>Arrival Time</th>
+					<th>Available Seats</th>
+					<th>Fare</th>
+					<th>Type</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Loop through flights and display each row -->
+				<tr th:each="flight : ${flights}">
+					<td th:text="${flight.flightNumber}">Flight Number</td>
+					<td th:text="${flight.departureAirport}">Departure Airport</td>
+					<td th:text="${flight.destinationAirport}">Destination Airport</td>
+					<td
+						th:text="${#temporals.format(flight.departureTime, 'dd-MM-yyyy HH:mm:ss')}">Departure
+						Time</td>
+					<td
+						th:text="${#temporals.format(flight.arrivalTime, 'dd-MM-yyyy HH:mm:ss')}">Arrival
+						Time</td>
+					<td th:text="${flight.availableSeats}">Available Seats</td>
+					<td th:text="${flight.fareDto.amount}">Available Seats</td>
+					<td th:text="${flight.type}">Type</td>
+					<td>
+						<form th:action="@{/flights}" method="POST">
+							<input type="hidden" name="_method" value="DELETE" />
+							<input type="hidden" name="id" th:value="${flight.id}"/>
+							<button type="submit">Delete</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
